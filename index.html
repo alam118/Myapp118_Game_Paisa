@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Gamer Guide - घर बैठे स्मार्ट गेमर बनें</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">🎮 SmartGamer</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">🏠 होम</a>
+            <a href="tips.html">🎯 टिप्स</a>
+            <a href="quiz.html">🧠 क्विज</a>
+            <a href="tracker.html">⏱️ ट्रैकर</a>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero">
+            <h1>नमस्ते, गेमर! 👋</h1>
+            <p>गेमिंग में स्मार्ट बनें, पैसे बचाएं, और अपनी स्किल बढ़ाएं</p>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="grid-4">
+            <a href="tips.html" class="feature-box" style="text-decoration: none; color: inherit;">
+                <span class="icon">🎯</span>
+                <h3>टिप्स & ट्रिक्स</h3>
+                <p style="color: #64748b;">गेम जीतने के सीक्रेट</p>
+            </a>
+            <a href="quiz.html" class="feature-box" style="text-decoration: none; color: inherit;">
+                <span class="icon">🧠</span>
+                <h3>डेली क्विज</h3>
+                <p style="color: #64748b;">अपना ज्ञान बढ़ाएं</p>
+            </a>
+            <a href="tracker.html" class="feature-box" style="text-decoration: none; color: inherit;">
+                <span class="icon">⏱️</span>
+                <h3>टाइम ट्रैकर</h3>
+                <p style="color: #64748b;">गेमिंग समय को मैनेज करें</p>
+            </a>
+            <a href="tips.html" class="feature-box" style="text-decoration: none; color: inherit;">
+                <span class="icon">💬</span>
+                <h3>कम्युनिटी</h3>
+                <p style="color: #64748b;">दूसरों से सीखें</p>
+            </a>
+        </div>
+
+        <!-- DAILY TIP -->
+        <div class="tip-card">
+            <h3>💡 आज की स्मार्ट टिप</h3>
+            <p id="dailyTip" style="font-size: 1.1rem; margin-top: 0.5rem;">लोड हो रहा...</p>
+        </div>
+
+        <!-- GOAL BOX -->
+        <div class="goal-box">
+            <h2>🎮 आज का लक्ष्य</h2>
+            <p>आज 30 मिनट से कम गेम खेलें और 2 नई ट्रिक्स सीखें</p>
+            <button class="btn btn-primary" onclick="alert('लक्ष्य सेट कर दिया गया! 🎯')">
+                लक्ष्य सेट करें
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>© 2025 Smart Gamer Guide - गेमिंग में स्मार्ट बनें</p>
+        <p class="small">⭐ 100% फ्री • कोई पेमेंट नहीं • सिर्फ ज्ञान</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
