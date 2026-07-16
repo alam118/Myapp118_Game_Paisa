@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>गेम डिटेल - Smart Gamer Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="logo" onclick="location.href='index.html'">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="history.back()">←</button>
+    </div>
+  </header>
+
+  <div style="padding: 0 20px;" id="gameDetailContainer">
+    <!-- JS से डायनामिक -->
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 होम</a>
+    <a href="games.html" class="nav-item">🎮 गेम्स</a>
+    <a href="articles.html" class="nav-item">📰 आर्टिकल्स</a>
+    <a href="favorites.html" class="nav-item">⭐ फेवरेट</a>
+    <a href="profile.html" class="nav-item">👤 प्रोफाइल</a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      const game = gamesData.find(g => g.id === id);
+
+      if (!game) {
+        document.getElementById('gameDetailContainer').innerHTML = `
+          <div style="text-align: center; padding: 40px;">
+            <h2>❌ गेम नहीं मिला</h2>
+            <button class="btn btn-primary" onclick="location.href='index.html'">होम जाएं</button>
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById('gameDetailContainer').innerHTML = `
+        <div class="game-card animate-in" style="padding: 24px;">
+          <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+            <div style="font-size: 4rem;">${game.icon}</div>
+            <div>
+              <h1 style="font-size: 1.8rem;">${game.name}</h1>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px;">
+                <span class="chip active">${getCategoryName(game.category)}</span>
+                <span class="trust-score trust-${game.trustScore}">
+                  ${game.trustScore === 'high' ? '✅' : '⚠️'} 
+                  ${game.trustScore === 'high' ? 'सुरक्षित' : 'सावधानी'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 16px 0;">
+            <div style="background: var(--gray-50); padding: 12px; border-radius: var(--radius); text-align: center;">
+              <div style="font-size: 0.75rem; color: var(--gray-500);">Rating</div>
+              <div style="font-size: 1.5rem; font-weight: 700;">⭐ ${game.rating}</div>
+            </div>
+            <div style="background: var(--gray-50); padding: 12px; border-radius: var(--radius); text-align: center;">
+              <div style="font-size: 0.75rem; color: var(--gray-500);">Downloads</div>
+              <div style="font-size: 1.5rem; font-weight: 700;">📥 ${game.downloads}</div>
+            </div>
+            <div style="background: var(--gray-50); padding: 12px; border-radius: var(--radius); text-align: center;">
+              <div style="font-size: 0.75rem; color: var(--gray-500);">Min Withdrawal</div>
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);">₹${game.minWithdrawal}</div>
+            </div>
+          </div>
+
+          <div style="margin: 16px 0;">
+            <h3>📝 Review</h3>
+            <p style="color: var(--gray-600); font-size: 1rem; line-height: 1.6;">${game.review}</p>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>✅ Pros</h4>
+              <ul>${game.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+            </div>
+            <div class="cons">
+              <h4>❌ Cons</h4>
+              <ul>${game.cons.map(c => `<li>${c}</li>`).join('')}</ul>
+            </div>
+          </div>
+
+          <div style="margin: 16px 0;">
+            <h3>💳 Payment Methods</h3>
+            <div class="withdrawal-methods">
+              ${game.paymentMethods.map(m => `<span class="method">${m}</span>`).join('')}
+            </div>
+          </div>
+
+          <div style="margin: 16px 0;">
+            <h3>📱 Download</h3>
+            <a href="${game.officialLink}" target="_blank" class="btn btn-primary" style="display: inline-block; margin-top: 8px;">
+              📥 Play Store से Download करें
+            </a>
+          </div>
+
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200);">
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <button class="btn btn-outline" onclick="shareGame('${game.name}')">📤 शेयर करें</button>
+              <button class="btn btn-outline" onclick="toggleFavorite(${game.id}); location.reload();">⭐ फेवरेट</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          ⚠️ <strong>Disclaimer:</strong> यह जानकारी केवल शैक्षिक उद्देश्यों के लिए है। किसी भी ऐप का उपयोग करने से पहले उसकी नीतियों को पढ़ें।
+        </div>
+      `;
+    });
+
+    function getCategoryName(cat) {
+      const map = {
+        quiz: '🧠 Quiz',
+        ludo: '🎲 Ludo',
+        fantasy: '🏏 Fantasy',
+        casual: '🎮 Casual',
+        puzzle: '🧩 Puzzle',
+        reward: '💰 Reward',
+        survey: '📋 Survey',
+        cashback: '💵 Cashback'
+      };
+      return map[cat] || cat;
+    }
+
+    function shareGame(name) {
+      if (navigator.share) {
+        navigator.share({
+          title: name,
+          text: 'इस गेम से घर बैठे पैसे कमाएं!',
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        showToast('लिंक कॉपी हो गया!', 'success');
+      }
+    }
+
+    function toggleFavorite(id) {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const index = favorites.indexOf(id);
+      if (index > -1) {
+        favorites.splice(index, 1);
+        showToast('⭐ फेवरेट से हटा दिया गया', 'info');
+      } else {
+        favorites.push(id);
+        showToast('⭐ फेवरेट में जोड़ दिया गया', 'success');
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
+    function showToast(message, type) {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
