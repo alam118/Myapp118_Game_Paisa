@@ -1,78 +1,201 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Gamer Guide - घर बैठे स्मार्ट गेमर बनें</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Smart Gamer Guide - घर बैठे पैसे कमाएं</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
-        <a href="index.html" class="logo">🎮 SmartGamer</a>
-        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html" class="active">🏠 होम</a>
-            <a href="tips.html">🎯 टिप्स</a>
-            <a href="quiz.html">🧠 क्विज</a>
-            <a href="tracker.html">⏱️ ट्रैकर</a>
-        </div>
-    </nav>
 
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="container">
-        <!-- HERO -->
-        <div class="hero">
-            <h1>नमस्ते, गेमर! 👋</h1>
-            <p>गेमिंग में स्मार्ट बनें, पैसे बचाएं, और अपनी स्किल बढ़ाएं</p>
-        </div>
-
-        <!-- FEATURES -->
-        <div class="grid-4">
-            <a href="tips.html" class="feature-box" style="text-decoration: none; color: inherit;">
-                <span class="icon">🎯</span>
-                <h3>टिप्स & ट्रिक्स</h3>
-                <p style="color: #64748b;">गेम जीतने के सीक्रेट</p>
-            </a>
-            <a href="quiz.html" class="feature-box" style="text-decoration: none; color: inherit;">
-                <span class="icon">🧠</span>
-                <h3>डेली क्विज</h3>
-                <p style="color: #64748b;">अपना ज्ञान बढ़ाएं</p>
-            </a>
-            <a href="tracker.html" class="feature-box" style="text-decoration: none; color: inherit;">
-                <span class="icon">⏱️</span>
-                <h3>टाइम ट्रैकर</h3>
-                <p style="color: #64748b;">गेमिंग समय को मैनेज करें</p>
-            </a>
-            <a href="tips.html" class="feature-box" style="text-decoration: none; color: inherit;">
-                <span class="icon">💬</span>
-                <h3>कम्युनिटी</h3>
-                <p style="color: #64748b;">दूसरों से सीखें</p>
-            </a>
-        </div>
-
-        <!-- DAILY TIP -->
-        <div class="tip-card">
-            <h3>💡 आज की स्मार्ट टिप</h3>
-            <p id="dailyTip" style="font-size: 1.1rem; margin-top: 0.5rem;">लोड हो रहा...</p>
-        </div>
-
-        <!-- GOAL BOX -->
-        <div class="goal-box">
-            <h2>🎮 आज का लक्ष्य</h2>
-            <p>आज 30 मिनट से कम गेम खेलें और 2 नई ट्रिक्स सीखें</p>
-            <button class="btn btn-primary" onclick="alert('लक्ष्य सेट कर दिया गया! 🎯')">
-                लक्ष्य सेट करें
-            </button>
-        </div>
+  <!-- ===== APP BAR ===== -->
+  <header class="app-bar">
+    <div class="logo">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="toggleDarkMode()" aria-label="Dark Mode">🌙</button>
+      <button onclick="location.href='profile.html'" aria-label="Profile">👤</button>
     </div>
+  </header>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <p>© 2025 Smart Gamer Guide - गेमिंग में स्मार्ट बनें</p>
-        <p class="small">⭐ 100% फ्री • कोई पेमेंट नहीं • सिर्फ ज्ञान</p>
-    </footer>
+  <!-- ===== SEARCH ===== -->
+  <div class="search-bar">
+    <span class="icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="गेम खोजें... (MPL, Dream11, Ludo...)" oninput="searchGames(this.value)" />
+  </div>
 
-    <script src="script.js"></script>
+  <!-- ===== CATEGORY CHIPS ===== -->
+  <div class="category-scroll">
+    <span class="chip active" onclick="filterGames('all')">🔥 सभी</span>
+    <span class="chip" onclick="filterGames('quiz')">🧠 Quiz</span>
+    <span class="chip" onclick="filterGames('ludo')">🎲 Ludo</span>
+    <span class="chip" onclick="filterGames('fantasy')">🏏 Fantasy</span>
+    <span class="chip" onclick="filterGames('casual')">🎮 Casual</span>
+    <span class="chip" onclick="filterGames('puzzle')">🧩 Puzzle</span>
+    <span class="chip" onclick="filterGames('reward')">💰 Reward</span>
+    <span class="chip" onclick="filterGames('survey')">📋 Survey</span>
+    <span class="chip" onclick="filterGames('cashback')">💵 Cashback</span>
+  </div>
+
+  <!-- ===== FEATURED GAMES SECTION ===== -->
+  <div class="section-header">
+    <h2>🔥 Top Earning Games</h2>
+    <a href="games.html" class="see-all">सभी देखें →</a>
+  </div>
+  <div class="game-grid" id="featuredGames">
+    <!-- JS से डायनामिक लोड -->
+  </div>
+
+  <!-- ===== NEW GAMES ===== -->
+  <div class="section-header">
+    <h2>🆕 नए गेम्स</h2>
+    <a href="games.html" class="see-all">सभी देखें →</a>
+  </div>
+  <div class="game-grid" id="newGames">
+    <!-- JS से डायनामिक लोड -->
+  </div>
+
+  <!-- ===== STEP BY STEP GUIDE ===== -->
+  <div class="section-header">
+    <h2>📖 शुरुआत कैसे करें?</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="number">1</div>
+      <div class="content">
+        <h4>Game Install करें</h4>
+        <p>Play Store से ऑफिशियल गेम डाउनलोड करें</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number">2</div>
+      <div class="content">
+        <h4>Account बनाएं</h4>
+        <p>मोबाइल नंबर या ईमेल से रजिस्टर करें</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number">3</div>
+      <div class="content">
+        <h4>Game खेलें</h4>
+        <p>स्किल बढ़ाएं और पॉइंट्स कमाएं</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number">4</div>
+      <div class="content">
+        <h4>Reward Collect करें</h4>
+        <p>वॉलेट में पॉइंट्स जमा करें</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="number">5</div>
+      <div class="content">
+        <h4>Withdraw करें</h4>
+        <p>UPI, Paytm या Bank से पैसे निकालें</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REAL vs FAKE ===== -->
+  <div class="section-header">
+    <h2>✅ Real vs Fake पहचानें</h2>
+  </div>
+  <div style="padding: 0 20px; display: grid; gap: 12px;">
+    <div class="genuine-card">
+      <h4>✅ Genuine Apps</h4>
+      <ul style="margin-top: 8px; list-style: none;">
+        <li>• Play Store पर Verified</li>
+        <li>• 1M+ Downloads</li>
+        <li>• 4.0+ Rating</li>
+        <li>• Clear Privacy Policy</li>
+        <li>• Customer Support Available</li>
+      </ul>
+    </div>
+    <div class="scam-card">
+      <h4>❌ Fake Apps - पहचान कैसे करें?</h4>
+      <ul style="margin-top: 8px; list-style: none;">
+        <li>• Joining Fee मांगना</li>
+        <li>• Unlimited Income Claim</li>
+        <li>• Fake Screenshots</li>
+        <li>• No Privacy Policy</li>
+        <li>• No Contact Details</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== TOP 10 LISTS ===== -->
+  <div class="section-header">
+    <h2>🏆 Top 10 Lists</h2>
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px;">
+    <a href="games.html?category=quiz" style="text-decoration: none;">
+      <div class="game-card" style="text-align: center; padding: 16px;">
+        🧠 Top 10 Quiz Games
+      </div>
+    </a>
+    <a href="games.html?category=ludo" style="text-decoration: none;">
+      <div class="game-card" style="text-align: center; padding: 16px;">
+        🎲 Top 10 Ludo Games
+      </div>
+    </a>
+    <a href="games.html?category=fantasy" style="text-decoration: none;">
+      <div class="game-card" style="text-align: center; padding: 16px;">
+        🏏 Top 10 Fantasy Games
+      </div>
+    </a>
+    <a href="games.html?category=reward" style="text-decoration: none;">
+      <div class="game-card" style="text-align: center; padding: 16px;">
+        💰 Top 10 Reward Apps
+      </div>
+    </a>
+  </div>
+
+  <!-- ===== SAFETY TIPS ===== -->
+  <div class="section-header">
+    <h2>🛡️ Safety Tips</h2>
+  </div>
+  <div style="padding: 0 20px; display: grid; gap: 10px;">
+    <div class="game-card" style="background: #EFF6FF; border-left: 4px solid #3B82F6;">
+      <p>🔒 OTP कभी शेयर न करें</p>
+    </div>
+    <div class="game-card" style="background: #EFF6FF; border-left: 4px solid #3B82F6;">
+      <p>💰 किसी को Payment न करें</p>
+    </div>
+    <div class="game-card" style="background: #EFF6FF; border-left: 4px solid #3B82F6;">
+      <p>📱 Official App ही डाउनलोड करें</p>
+    </div>
+    <div class="game-card" style="background: #EFF6FF; border-left: 4px solid #3B82F6;">
+      <p>⭐ Review पढ़कर Install करें</p>
+    </div>
+    <div class="game-card" style="background: #EFF6FF; border-left: 4px solid #3B82F6;">
+      <p>📄 Privacy Policy जरूर देखें</p>
+    </div>
+  </div>
+
+  <!-- ===== DISCLAIMER ===== -->
+  <div class="disclaimer">
+    ⚠️ <strong>Disclaimer:</strong> यह ऐप किसी भी गेम का आधिकारिक ऐप नहीं है। यह केवल जानकारी और शिक्षा के उद्देश्य से बनाया गया है। कमाई गेम, आपकी स्किल, उपलब्ध ऑफ़र और संबंधित प्लेटफ़ॉर्म की शर्तों पर निर्भर करती है। किसी भी प्रकार की आय की गारंटी नहीं दी जाती। गेम डाउनलोड करने के लिए हमेशा आधिकारिक स्रोत (जैसे Play Store) का उपयोग करें।
+  </div>
+
+  <!-- ===== BOTTOM NAVIGATION ===== -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <span class="icon">🏠</span> होम
+    </a>
+    <a href="games.html" class="nav-item">
+      <span class="icon">🎮</span> गेम्स
+    </a>
+    <a href="articles.html" class="nav-item">
+      <span class="icon">📰</span> आर्टिकल्स
+    </a>
+    <a href="favorites.html" class="nav-item">
+      <span class="icon">⭐</span> फेवरेट    </a>
+    <a href="profile.html" class="nav-item">
+      <span class="icon">👤</span> प्रोफाइल
+    </a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
