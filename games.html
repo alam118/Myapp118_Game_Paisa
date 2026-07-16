@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>सभी गेम्स - Smart Gamer Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="logo" onclick="location.href='index.html'">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="location.href='index.html'">←</button>
+    </div>
+  </header>
+
+  <div class="section-header">
+    <h2>🎮 सभी गेम्स</h2>
+    <span style="font-size: 0.85rem; color: var(--gray-500);" id="gameCount"></span>
+  </div>
+
+  <div class="game-grid" id="allGames">
+    <!-- JS से डायनामिक -->
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 होम</a>
+    <a href="games.html" class="nav-item active">🎮 गेम्स</a>
+    <a href="articles.html" class="nav-item">📰 आर्टिकल्स</a>
+    <a href="favorites.html" class="nav-item">⭐ फेवरेट</a>
+    <a href="profile.html" class="nav-item">👤 प्रोफाइल</a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('allGames');
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category');
+
+      let games = gamesData;
+      if (category) {
+        games = gamesData.filter(g => g.category === category);
+        document.querySelector('.section-header h2').textContent = 
+          `${getCategoryName(category)} - ${games.length} गेम्स`;
+      }
+
+      document.getElementById('gameCount').textContent = `${games.length} गेम्स`;
+
+      container.innerHTML = games.map(game => `
+        <div class="game-card animate-in" onclick="location.href='game-detail.html?id=${game.id}'">
+          ${game.isHot ? '<span class="badge badge-hot">🔥 Hot</span>' : ''}
+          ${game.isNew ? '<span class="badge badge-new">🆕 New</span>' : ''}
+          <div class="game-icon">${game.icon}</div>
+          <div class="game-name">${game.name}</div>
+          <div class="game-category">${getCategoryName(game.category)}</div>
+          <div class="game-stats">
+            <span>⭐ ${game.rating}</span>
+            <span>📥 ${game.downloads}</span>
+            <span>💰 ₹${game.minWithdrawal}</span>
+          </div>
+          <div class="game-actions">
+            <a href="${game.officialLink}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+              📥 Download
+            </a>
+          </div>
+        </div>
+      `).join('');
+    });
+
+    function getCategoryName(cat) {
+      const map = {
+        quiz: '🧠 Quiz',
+        ludo: '🎲 Ludo',
+        fantasy: '🏏 Fantasy',
+        casual: '🎮 Casual',
+        puzzle: '🧩 Puzzle',
+        reward: '💰 Reward',
+        survey: '📋 Survey',
+        cashback: '💵 Cashback'
+      };
+      return map[cat] || cat;
+    }
+  </script>
+</body>
+</html>
