@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>फेवरेट गेम्स - Smart Gamer Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="logo" onclick="location.href='index.html'">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="location.href='index.html'">←</button>
+    </div>
+  </header>
+
+  <div class="section-header">
+    <h2>⭐ फेवरेट गेम्स</h2>
+    <span style="font-size: 0.85rem; color: var(--gray-500);" id="favCount"></span>
+  </div>
+
+  <div class="game-grid" id="favoritesContainer">
+    <!-- JS से डायनामिक -->
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 होम</a>
+    <a href="games.html" class="nav-item">🎮 गेम्स</a>
+    <a href="articles.html" class="nav-item">📰 आर्टिकल्स</a>
+    <a href="favorites.html" class="nav-item active">⭐ फेवरेट</a>
+    <a href="profile.html" class="nav-item">👤 प्रोफाइल</a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const favGames = gamesData.filter(g => favorites.includes(g.id));
+      
+      const container = document.getElementById('favoritesContainer');
+      document.getElementById('favCount').textContent = `${favGames.length} गेम्स`;
+
+      if (favGames.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px; grid-column: 1/-1;">
+            <div style="font-size: 4rem;">⭐</div>
+            <h2 style="margin: 16px 0;">कोई फेवरेट गेम नहीं</h2>
+            <p style="color: var(--gray-500);">गेम्स पर ⭐ बटन दबाकर फेवरेट में जोड़ें</p>
+            <button class="btn btn-primary" onclick="location.href='games.html'" style="margin-top: 16px;">
+              🎮 गेम्स देखें
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = favGames.map(game => `
+        <div class="game-card animate-in" onclick="location.href='game-detail.html?id=${game.id}'">
+          <div class="game-icon">${game.icon}</div>
+          <div class="game-name">${game.name}</div>
+          <div class="game-category">${getCategoryName(game.category)}</div>
+          <div class="game-stats">
+            <span>⭐ ${game.rating}</span>
+            <span>📥 ${game.downloads}</span>
+          </div>
+          <div class="game-actions">
+            <a href="${game.officialLink}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+              📥 Download
+            </a>
+            <button class="btn btn-outline" onclick="event.stopPropagation(); removeFavorite(${game.id})">
+              ❌ हटाएं
+            </button>
+          </div>
+        </div>
+      `).join('');
+    });
+
+    function getCategoryName(cat) {
+      const map = {
+        quiz: '🧠 Quiz',
+        ludo: '🎲 Ludo',
+        fantasy: '🏏 Fantasy',
+        casual: '🎮 Casual',
+        puzzle: '🧩 Puzzle',
+        reward: '💰 Reward',
+        survey: '📋 Survey',
+        cashback: '💵 Cashback'
+      };
+      return map[cat] || cat;
+    }
+
+    function removeFavorite(id) {
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      favorites = favorites.filter(f => f !== id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      location.reload();
+    }
+  </script>
+</body>
+</html>
