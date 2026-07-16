@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>आर्टिकल्स - Smart Gamer Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="logo" onclick="location.href='index.html'">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="location.href='index.html'">←</button>
+    </div>
+  </header>
+
+  <div class="section-header">
+    <h2>📰 लेटेस्ट आर्टिकल्स</h2>
+  </div>
+
+  <div style="padding: 0 20px; display: grid; gap: 12px;" id="articlesContainer">
+    <!-- JS से डायनामिक -->
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 होम</a>
+    <a href="games.html" class="nav-item">🎮 गेम्स</a>
+    <a href="articles.html" class="nav-item active">📰 आर्टिकल्स</a>
+    <a href="favorites.html" class="nav-item">⭐ फेवरेट</a>
+    <a href="profile.html" class="nav-item">👤 प्रोफाइल</a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('articlesContainer');
+      container.innerHTML = articlesData.map(article => `
+        <div class="game-card animate-in" onclick="showArticle(${article.id})" style="cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 2.5rem;">${article.icon}</div>
+            <div style="flex: 1;">
+              <h3 style="font-size: 1.1rem;">${article.title}</h3>
+              <div style="display: flex; gap: 12px; font-size: 0.8rem; color: var(--gray-500); margin-top: 4px;">
+                <span>📂 ${article.category}</span>
+                <span>⏱️ ${article.readTime}</span>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--gray-600); margin-top: 6px;">${article.excerpt}</p>
+            </div>
+            <span style="font-size: 1.2rem; color: var(--gray-400);">→</span>
+          </div>
+        </div>
+      `).join('');
+    });
+
+    function showArticle(id) {
+      const article = articlesData.find(a => a.id === id);
+      if (!article) return;
+      // Simple alert for demo, can be expanded to full article page
+      alert(`📖 ${article.title}\n\n${article.excerpt}\n\nपूरा आर्टिकल जल्द आ रहा है!`);
+    }
+  </script>
+</body>
+</html>
