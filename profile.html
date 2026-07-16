@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>प्रोफाइल - Smart Gamer Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-bar">
+    <div class="logo" onclick="location.href='index.html'">🎮 <span>SmartGamer</span></div>
+    <div class="app-bar-actions">
+      <button onclick="location.href='index.html'">←</button>
+    </div>
+  </header>
+
+  <div class="profile-header">
+    <div class="avatar">👤</div>
+    <h2>गेमर</h2>
+    <p>Smart Gamer Guide</p>
+  </div>
+
+  <div class="profile-menu">
+    <div class="menu-item" onclick="toggleDarkMode()">
+      <span class="icon">🌙</span>
+      <div class="text">
+        <h4>डार्क मोड</h4>
+        <p>ऐप का थीम बदलें</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="shareApp()">
+      <span class="icon">📤</span>
+      <div class="text">
+        <h4>ऐप शेयर करें</h4>
+        <p>दोस्तों को भेजें</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="rateApp()">
+      <span class="icon">⭐</span>
+      <div class="text">
+        <h4>रेटिंग दें</h4>
+        <p>हमें 5 स्टार दें</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="location.href='faq.html'">
+      <span class="icon">❓</span>
+      <div class="text">
+        <h4>FAQ</h4>
+        <p>अक्सर पूछे जाने वाले सवाल</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="location.href='safety.html'">
+      <span class="icon">🛡️</span>
+      <div class="text">
+        <h4>Safety Tips</h4>
+        <p>सुरक्षा सुझाव</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="location.href='scam-alert.html'">
+      <span class="icon">⚠️</span>
+      <div class="text">
+        <h4>Scam Alert</h4>
+        <p>फेक ऐप्स की पहचान</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="showToast('जल्द आ रहा है!', 'info')">
+      <span class="icon">🌐</span>
+      <div class="text">
+        <h4>भाषा बदलें</h4>
+        <p>हिन्दी / English</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+
+    <div class="menu-item" onclick="location.href='compare.html'">
+      <span class="icon">📊</span>
+      <div class="text">
+        <h4>Compare Games</h4>
+        <p>दो गेम्स की तुलना</p>
+      </div>
+      <span class="arrow">›</span>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    📄 <strong>Privacy Policy:</strong> आपका डेटा सुरक्षित है। हम कोई डेटा शेयर नहीं करते।
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 होम</a>
+    <a href="games.html" class="nav-item">🎮 गेम्स</a>
+    <a href="articles.html" class="nav-item">📰 आर्टिकल्स</a>
+    <a href="favorites.html" class="nav-item">⭐ फेवरेट</a>
+    <a href="profile.html" class="nav-item active">👤 प्रोफाइल</a>
+  </nav>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
