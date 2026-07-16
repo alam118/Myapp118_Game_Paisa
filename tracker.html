@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>टाइम ट्रैकर - Smart Gamer Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🎮 SmartGamer</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">🏠 होम</a>
+            <a href="tips.html">🎯 टिप्स</a>
+            <a href="quiz.html">🧠 क्विज</a>
+            <a href="tracker.html" class="active">⏱️ ट्रैकर</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem;">⏱️ गेमिंग टाइम ट्रैकर</h1>
+
+        <div class="card max-w-2xl mx-auto">
+            <div class="tracker-input">
+                <input type="number" id="hoursInput" placeholder="घंटे" min="0">
+                <input type="number" id="minutesInput" placeholder="मिनट" min="0" max="59">
+                <button class="btn btn-primary" onclick="addSession()">🕹️ सेशन जोड़ें</button>
+            </div>
+
+            <div id="totalTime" style="font-size: 1.2rem; font-weight: bold; text-align: center; margin: 1rem 0;">
+                आज का कुल समय: 0 घंटे 0 मिनट
+            </div>
+
+            <div id="warningMessage" style="display: none; background: #fee2e2; color: #dc2626; padding: 1rem; border-radius: 0.75rem; margin: 1rem 0; text-align: center;">
+                ⚠️ ध्यान दें! आपने आज बहुत ज्यादा गेम खेला, ब्रेक लें!
+            </div>
+
+            <div id="historyContainer">
+                <h3 style="margin-bottom: 1rem;">📋 आज का इतिहास</h3>
+                <div id="historyList">
+                    <p style="color: #94a3b8; text-align: center;">अभी तक कोई सेशन नहीं</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Smart Gamer Guide - गेमिंग में स्मार्ट बनें</p>
+        <p class="small">⭐ 100% फ्री • कोई पेमेंट नहीं • सिर्फ ज्ञान</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
